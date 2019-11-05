@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="utm_zone", # Replace with your own username
-    version="1.0.0",
+    version="1.0.1",
     author="Per Liedman",
     author_email="per@liedman.net",
     description="Find the UTM zone for your GeoJSON",
