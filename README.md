@@ -1,8 +1,8 @@
 # utm-zone
 
-Find the UTM zone for your GeoJSON. 
+Find the UTM zone for your GeoJSON or your WGS84 coordinates.
 
-Provided a GeoJSON object (with coordinates using WGS84), calculate the Proj.4 definition or EPSG code for a suitable UTM zone for this geometry. This will only work if the geometry has limited geographic size, so that it can fit into a single UTM zone.
+Provided a GeoJSON object or a set of coordinates (with coordinates using WGS84), calculate the Proj.4 definition or EPSG code for a suitable UTM zone for this geometry. This will only work if the geometry has limited geographic size, so that it can fit into a single UTM zone.
 
 Note that this module does not do any reprojection of coordinates, you might want to look at [pyproj](https://pypi.org/project/pyproj/) for that.
 
@@ -15,6 +15,10 @@ See also [https://github.com/perliedman/utm-zone](https://github.com/perliedman/
 ### `epsg(geojson)`
 
 Returns the EPSG code for the UTM zone of the provided GeoJSON object.
+
+### `epsg_from_lnglat(lng, lat)`
+
+Returns the EPSG code for the UTM zone of the provided coordinates.
 
 ### `proj(geojson)`
 
