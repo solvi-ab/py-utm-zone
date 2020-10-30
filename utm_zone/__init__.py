@@ -1,9 +1,11 @@
 from numbers import Number
 import math
+from collections.abc import Sequence
 
 def epsg(geojson):
   """
-  Provided a GeoJSON object, returns the EPSG code (integer) for the UTM zone best
+  Provided a GeoJSON object or a coordinate array [x, y],
+  returns the EPSG code (integer) for the UTM zone best
   matching the GeoJSON's geometry.
   """
   firstCoord = getFirstCoord(geojson)
@@ -12,7 +14,8 @@ def epsg(geojson):
 
 def proj(geojson):
   """
-  Provided a GeoJSON object, returns the Proj.4 definition for the UTM zone best
+  Provided a GeoJSON object or a coordinate array [x, y],
+  returns the Proj.4 definition for the UTM zone best
   matching the GeoJSON's geometry.
   """
   firstCoord = getFirstCoord(geojson)
@@ -28,7 +31,8 @@ def getFirstCoord(geojson):
       return coordinates
 
   firstCoord = \
-    recurse(geojson['coordinates']) if 'coordinates' in geojson \
+    geojson if isinstance(geojson, Sequence) and len(geojson) >= 2 \
+    else recurse(geojson['coordinates']) if 'coordinates' in geojson \
     else recurse(geojson['geometry']['coordinates']) if 'geometry' in geojson \
     else recurse(geojson['geometries'][0]['coordinates']) if 'geometries' in geojson \
     else recurse(geojson['features'][0]['geometry']['coordinates']) if 'features' in geojson \
